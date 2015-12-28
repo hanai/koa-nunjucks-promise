@@ -24,6 +24,7 @@ module.exports = function (root, opts) {
     }
 
     return function (ctx, next) {
+        if (ctx.render) return next();
         ctx.render = function (view, locals) {
             locals = locals || {};
             var state = ctx.state || {};
