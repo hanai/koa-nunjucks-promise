@@ -59,7 +59,7 @@ $ DEBUG=koa-nunjucks-promise
 
 ## License
 
-[MIT](./license)
+[MIT](./LICENSE)
 
 [npm-image]: https://img.shields.io/npm/v/koa-nunjucks-promise.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/koa-nunjucks-promise
