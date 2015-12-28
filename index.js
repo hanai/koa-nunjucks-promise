@@ -3,7 +3,10 @@ var path = require('path');
 var debug = require('debug')('koa-nunjucks-promise');
 
 module.exports = function (root, opts) {
-    root = root || path.dirname(module.parent.filename);
+    var basePath = path.dirname(module.parent.filename);
+    root = root || basePath;
+    root = path.resolve(basePath, root);
+
     opts = opts || {};
 
     var env = nunjucks.configure(root, opts);
