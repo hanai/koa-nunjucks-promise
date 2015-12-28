@@ -41,6 +41,21 @@ describe('koa-nunjucks-promise', function () {
             .expect(200, done);
     });
 
+    it('set and render local', done => {
+        var app = new Koa();
+        app.use(views())
+            .use(async (ctx, next) => {
+                await ctx.render('./fixtures/global-state', {
+                    engine: 'nunjucks'
+                });
+            });
+
+        request(app.listen()).get('/')
+            .expect('Content-Type', /html/)
+            .expect(/basic:nunjucks/)
+            .expect(200, done);
+    });
+
     it('set option: root', done => {
         var app = new Koa();
         app.use(views('../test'))
@@ -52,6 +67,58 @@ describe('koa-nunjucks-promise', function () {
         request(app.listen()).get('/')
             .expect('Content-Type', /html/)
             .expect(/basic:nunjucks/)
+            .expect(200, done);
+    });
+
+    it('set option: ext', done => {
+        var app = new Koa();
+        app.use(views({ext: 'nunjucks'}))
+            .use(async (ctx, next) => {
+                ctx.state.engine = 'nunjucks';
+                await ctx.render('./fixtures/ext');
+            });
+
+        request(app.listen()).get('/')
+            .expect('Content-Type', /html/)
+            .expect(/basic:nunjucks/)
+            .expect(200, done);
+    });
+
+    it('set option: filters', done => {
+        var app = new Koa();
+        app.use(views({
+                filters: {
+                    second: function (arr) {
+                        return arr[1];
+                    }
+                }
+            }))
+            .use(async (ctx, next) => {
+                await ctx.render('./fixtures/filter', {
+                    students: ['Tony', 'Frank', 'Jerry', 'Yuri']
+                });
+            });
+
+        request(app.listen()).get('/')
+            .expect('Content-Type', /html/)
+            .expect(/student: Frank/)
+            .expect(200, done);
+    });
+
+    it('set option: filters', done => {
+        var app = new Koa();
+        app.use(views({
+                globals: {
+                    SITE_NAME: 'app'
+                }
+            }))
+            .use(async (ctx, next) => {
+                await ctx.render('./fixtures/global');
+            });
+
+        request(app.listen()).get('/')
+            .expect('Content-Type', /html/)
+            .expect(/site: app/)
             .expect(200, done);
     });
 
@@ -70,6 +137,23 @@ describe('koa-nunjucks-promise', function () {
                     app: app,
                     b: ctx.state,
                     engine: 'nunjucks'
+                });
+            });
+
+        request(app.listen()).get('/')
+            .expect('Content-Type', /html/)
+            .expect(/basic:nunjucks/)
+            .expect(200, done);
+    });
+
+    it('merges global and local state ', done => {
+        var app = new Koa();
+        app.use(views())
+            .use(async (ctx, next) => {
+                ctx.state.engine = 'nunjucks';
+
+                await ctx.render('./fixtures/state', {
+                    type: 'basic'
                 });
             });
 

@@ -4,7 +4,14 @@ var debug = require('debug')('koa-nunjucks-promise');
 
 module.exports = function (root, opts) {
     var basePath = path.dirname(module.parent.filename);
-    root = root || basePath;
+
+    if (typeof root === 'object') {
+        opts = root;
+        root = opts.root || basePath;
+    } else if (!root) {
+        root = basePath;
+    }
+
     root = path.resolve(basePath, root);
 
     opts = opts || {};
