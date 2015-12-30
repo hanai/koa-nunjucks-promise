@@ -21,14 +21,14 @@ module.exports = function (root, opts) {
     var ext = opts.ext || 'html';
 
     var filters = opts.filters || {};
-    for (var f in filters) {
-        if (filters.hasOwnProperty(f)) env.addFilter(f, filters[f]);
-    }
+    Object.keys(filters).forEach(f => {
+        env.addFilter(f, filters[f]);
+    });
 
     var globals = opts.globals || {};
-    for (var g in globals) {
-        if (globals.hasOwnProperty(g)) env.addGlobal(g, globals[g]);
-    }
+    Object.keys(globals).forEach(g => {
+        env.addGlobal(g, globals[g]);
+    });
 
     return function (ctx, next) {
         if (ctx.render) return next();
