@@ -1,10 +1,11 @@
 {
   "name": "koa-nunjucks-promise",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "nunjucks rendering middleware with promise for koa",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register --reporter dot --harmony"
+    "test": "./node_modules/.bin/mocha --compilers js:babel-register --reporter spec",
+    "cover": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -u exports --compilers js:babel-register --reporter spec"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-register": "^6.3.13",
     "chai": "^3.4.1",
+    "istanbul": "^0.4.1",
     "koa": "^2.0.0-alpha.3",
     "mocha": "^2.3.4",
     "supertest": "^1.1.0"

@@ -15,7 +15,10 @@ $ npm install koa-nunjucks-promise
 ## Example
 
 ``` js
+var Koa = require('koa');
 var views = require('koa-nunjucks-promise');
+
+var app = new Koa();
 
 app.use(views('views', {
   ext: 'html',
