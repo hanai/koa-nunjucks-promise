@@ -4,7 +4,7 @@
 [![Dependency Status][david-image]][david-url]
 [![License][license-image]][license-url]
 
-nunjucks rendering middleware with promise for koa
+nunjucks rendering middleware with promise for koa@next
 
 ## Installation
 
