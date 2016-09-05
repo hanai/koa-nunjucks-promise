@@ -1,6 +1,6 @@
 {
   "name": "koa-nunjucks-promise",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "nunjucks rendering middleware with promise for koa",
   "main": "index.js",
   "scripts": {
