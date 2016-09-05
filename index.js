@@ -49,10 +49,9 @@ module.exports = function (root, opts) {
                 });
             }).then(function (html) {
                 ctx.body = html;
-            }).catch(function (error) {
-                console.error(error);
             });
         };
         return next();
     }
 };
+
