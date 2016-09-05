@@ -22,7 +22,7 @@ module.exports = function (root, opts) {
 
     var filters = opts.filters || {};
     Object.keys(filters).forEach(f => {
-        env.addFilter(f, filters[f]);
+        env.addFilter.apply(env, [f].concat(filters[f]));
     });
 
     var globals = opts.globals || {};
