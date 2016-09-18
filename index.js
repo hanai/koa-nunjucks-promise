@@ -48,6 +48,7 @@ module.exports = function (root, opts) {
                     }
                 });
             }).then(function (html) {
+                ctx.type = 'text/html';
                 ctx.body = html;
             });
         };
