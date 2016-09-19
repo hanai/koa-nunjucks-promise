@@ -3,7 +3,6 @@ var path = require('path');
 var debug = require('debug')('koa-nunjucks-promise');
 
 module.exports = function (root, opts) {
-
   var basePath = path.dirname(module.parent.filename);
 
   if (typeof root === 'object') {
@@ -43,6 +42,7 @@ module.exports = function (root, opts) {
         env.render(name, context, function (err, res) {
           if (err) return reject(err);
           ctx.body = res;
+          ctx.type = 'text/html';
           resolve();
         });
       });
